@@ -35,6 +35,7 @@ const main = async () => {
 		let drivers = await getDrivers();
 		let csv = toCSV(drivers);
 		fs.writeFileSync('drivers.csv', csv);
+		console.log("Done");
 	} catch (err) {
 		console.error(err);
 	}
