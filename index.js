@@ -14,12 +14,12 @@ const getDrivers = () => new Promise((resolve, reject) => {
 		rows.forEach(row => {
 			result.push([
 				row.driverId,
-				row.name,
-				row.lastName,
-				row.phone,
-				row.email,
+				row.name.trim(),
+				row.lastName.trim(),
+				row.phone.trim(),
+				row.email.trim(),
 				row.transType,
-				row.plate
+				row.plate.trim()
 			]);
 		});
 		resolve(result);
@@ -37,10 +37,10 @@ const getCustomers = () => new Promise((resolve, reject) => {
 		rows.forEach(row => {
 			result.push([
 				row.customerId,
-				row.name,
-				row.lastName,
-				row.phone,
-				row.email
+				row.name.trim(),
+				row.lastName.trim(),
+				row.phone.trim(),
+				row.email.trim()
 			]);
 		});
 		resolve(result);
@@ -53,9 +53,11 @@ const toCSV = (list) => {
 
 const main = async () => {
 	try {
+		// Drivers
 		let drivers = await getDrivers();
 		let csv = toCSV(drivers);
 		fs.writeFileSync('drivers.csv', csv, 'utf8');
+		// Customers
 		let customers = await getCustomers();
 		csv = toCSV(customers);
 		fs.writeFileSync('customers.csv', csv, 'utf8');
